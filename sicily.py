@@ -4,6 +4,7 @@ import urllib2
 import re
 import urllib
 import json
+from docopt import docopt
 from bs4 import BeautifulSoup
 
 
@@ -55,6 +56,12 @@ def get_source_code(opener,sid):
     return soup.find('pre').get_text()
 
 def main():
+    args = docopt("""
+            Usage:
+                  sicily.py <username> <password>
+                  """)
+    username = args['username']
+    password =  args['password']
     opener = set_cookie()
     login(opener,username,password)
     save_problems(opener,username)
